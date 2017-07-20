@@ -1,11 +1,9 @@
 {
-  "title"   : "DB",
-  "version" : 1,
-  "items" : [
-  	{"name" : "a", "id" : 1},
-  	{"name" : "b", "id" : 2},
-  	{"name" : "c", "id" : 3},
-  	{"name" : "d", "id" : 4},
-  	{"name" : "e", "id" : 5}
+  "appname"   : "matzapp",
+  "updatetime" : 1,
+  "params" : [
+  	{"param1" : "hoge"},
+  	{"param2" : "munya"},
+  	{"param3" : "cyome"}
   ]
 }
