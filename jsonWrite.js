@@ -1,12 +1,5 @@
-// function write(filePath, stream) {
-//   ver result = false;
-//   try {
-//     fs.writeFileSync(filePath, stream);
-//     return true;
-//   } catch(err) {
-//     return false;
-//   }
-// }
+var fs = require('fs');
+var outputFilePath = "output.json";
 
 var data = {
 	hoge: 100,
@@ -15,3 +8,15 @@ var data = {
 };
 
 console.log(JSON.stringify(data, null, '  '));
+write(outputFilePath, JSON.stringify(data, null, '  '))
+
+function write(filePath, stream) {
+  var result = false;
+  try {
+    fs.writeFileSync(filePath, stream);
+    return true;
+  } catch(err) {
+    return false;
+  }
+}
+
