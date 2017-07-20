@@ -2,7 +2,7 @@
 Node.js, Express, Docker  
 File operation
 
-
+[La-Poプロジェクト](https://github.com/matzTada/La-Po)を適宜参照すること（特にExpress, JSまわり）
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_MOVIE_ID_HERE
 " target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_MOVIE_ID_HERE/0.jpg" 
