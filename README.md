@@ -1,4 +1,4 @@
-#WestlabGCTCGUI
+# WestlabGCTCGUI
 
 * Node.js, Express, Docker  
 * File operation
@@ -6,6 +6,9 @@
 * 今後のことを考えると，websocketを使った方がいいかもしれない([Expressでの実装例](https://team-lab.github.io/skillup-nodejs/3/1.html))
 	* 例えば，サーバ側でパラメータが書き換えられたときとか，処理が終わったときとか．
 * ファイル名を```POST```とかで指定して送らせるのは鬼のように危ないな．```..```とか使えば実質どこでも行けちゃうわけだし．```read```も危ないが，writeは相当やばい
+	* 読み込み，書き込み含め，パスを固定
+	* ```apikey```みたいなのを作る？
+* ~~DOM操作をもう少し，ちゃんとやろう~~結局同じ行数になりそうな感じだからちょっと保留
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_MOVIE_ID_HERE
 " target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_MOVIE_ID_HERE/0.jpg" 

@@ -10,7 +10,6 @@ var index = require('./routes/index');
 
 var app = express();
 
-
 // view engine setup
 app.set('port', 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -33,13 +32,19 @@ app.post('/readjson', function(req, res) {
   	var filepath = path.join(__dirname, '/public', '/jsons', filename);
   	console.log('filepath: ' + filepath);
   	var filestr = fileRead(filepath);
-  	console.log(filestr.toString());
-  	if(filestr){ //succeed in read file and has contents
-      res.send(filestr);
-      console.log(filepath + '\n' + filestr);
+    console.log(filestr);
+    var returnObj = {
+      "filepath" : filepath,
+      "filestr" : JSON.parse(filestr)
+    }
+    var returnStr = JSON.stringify(returnObj);
+  	console.log(returnStr);
+  	if(returnStr){ //succeed in read file and has contents
+      res.send(returnStr);
+      console.log("send data");
   	}else{
   	  res.send(false);
-  	  console.log("error or no data in :" + filepath);
+  	  console.log("error or no data");
   	}
   } else {
     res.send(false);

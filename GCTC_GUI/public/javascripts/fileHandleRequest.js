@@ -17,40 +17,15 @@ function postReadJson() { // POST /readjson to send filename to be read on the s
     if (res) {
       console.log('received valid data');
       var obj = JSON.parse(res);
-
-      var jsonListStr = '';
-
-      jsonListStr += "<ul>";
-      for (var soto in obj) {
-        jsonListStr += "<li>";
-        jsonListStr += soto + ' : ';
-        console.log(soto, tmpSotoObj);
-        var tmpSotoObj = obj[soto];
-        if (typeof(tmpSotoObj) == "object") {
-          jsonListStr += "<ul>";
-          for (var naka in tmpSotoObj) {
-            jsonListStr += "<li>";
-            jsonListStr += naka + ' : ';
-
-            jsonListStr += "<input id='" + naka + "' type='text' value='" + tmpSotoObj[naka] + "'/>"
-
-            console.log(naka, tmpSotoObj[naka]);
-            jsonListStr += "</li>";
-          }
-          jsonListStr += "</ul>";
-        } else {
-          jsonListStr += tmpSotoObj;
-        }
-        jsonListStr += "</li>";
-      }
-      jsonListStr += "</ul>";
-
+      var jsonNameStr = obj.filepath;
+      $('#jsonName').html(jsonNameStr);
+      var jsonListStr = recursiveJsonList(obj.filestr, '');
       $('#jsonList').html(jsonListStr);
-
-      recentJsonObj = obj; // pass json object for output
+      recentJsonObj = obj.filestr; // pass json object for output
 
     } else {
       console.log('received invalid data');
+      recentJsonObj = undefined
     }
   });
 
@@ -64,20 +39,43 @@ $('#formWriteJson').submit(function() { // call postWriteJson when a formWriteJs
 
 function postWriteJson(jsonobj) { // POST /WriteJson to send filename to be read on the server
   if (recentJsonObj != undefined && recentJsonObj.params.length != 0) {
-  	for(var key in recentJsonObj.params){
-      recentJsonObj.params[key] = $('#' + key).val();
-      $('#' + key).val('');
-  	}
+    for (var key in recentJsonObj.params) {
+      recentJsonObj.params[key] = $('#form' + key).val();
+      $('#form' + key).val('');
+    }
     // var filename = $('#textWriteJson').val(); // get value from text form
-    // console.log('require:' + filename + 'via POST');
-    // var content = '{"testStr" : "testStr"}';
-    var content = JSON.stringify(recentJsonObj);
+    var content = JSON.stringify(recentJsonObj); // var content = '{"testStr" : "testStr"}';
     $.post('/writejson', { content: content }, function(res) { //access post /WriteJson with value
       console.log('received responce: ' + res + ' from server');
+      if(res){
+        postReadJson();
+      }
     });
-    recentJsonObj = undefined;
-  }else{
-  	consol.log("invalid operation. write canceled")
+  } else {
+    console.log("invalid operation. write canceled")
   }
+}
 
+function recursiveJsonList(jsonObj, prevKey) { //cannot handle array yet... need to be fixed
+  var str = "<ul>";
+  for (var key in jsonObj) {
+    str += "<li>";
+    str += key + ' : ';
+    var value = jsonObj[key];
+    // console.log(key, value);
+
+    if (typeof(value) == "object") {
+      str += recursiveJsonList(value, key);
+    } else {
+      if(prevKey == 'params'){ //hmmm... need to be fixed
+        str += "<input id='form" + key + "' type='text' value='" + value + "'/>"
+      }else{
+        str += value;
+      }
+    }
+    str += "</li>";
+  }
+  str += "</ul>";
+
+  return str;
 }
