@@ -4,12 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs'); //added by TadaMatz file handling
 
 var index = require('./routes/index');
 
 var app = express();
 
 // view engine setup
+app.set('port', 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -22,6 +24,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+
+app.post('/handler', function(req, res) {
+  var name = req.body.name;
+  if (name) {
+    // res.send(true);
+    res.send("received: " + name)
+    var message = new Buffer(name + "\n");
+    console.log(message);
+  } else {
+    res.send(false);
+  } 
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,3 +57,34 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+//file handling functions
+function fileCheck(filePath) {
+  var isExist = false;
+  try {
+    fs.statSync(filePath);
+    return true;
+  } catch(err) {
+    return false;
+  }
+  return isExist;
+}
+
+function fileRead(filePath) {
+  var content = new String();
+  if(check(filePath)) {;
+    content = fs.readFileSync(filePath, 'utf8');
+  }
+  return content;
+};
+
+function fileWrite(filePath, stream) {
+  var result = false;
+  try {
+    fs.writeFileSync(filePath, stream);
+    return true;
+  } catch(err) {
+    return false;
+  }
+}
+

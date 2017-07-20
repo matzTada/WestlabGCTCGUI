@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1><%= title %></h1>
+  <p>Welcome to
+    <%= title %>
+  </p>
+  <form id='formLM'>
+    <p>
+      <h3>
+        <label for='textLM'>message for ledmatrix</label>
+      </h3>
+      <input id='textLM' type='text' name='textLM' />
+    </p>
+    <p>
+      <input type='submit' value='send' />
+    </p>
+  </form>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+  <script type="text/javascript" src="javascripts/fileHandleRequest.js"></script>
+</body>
+
 </html>
