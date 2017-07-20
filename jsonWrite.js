@@ -1,6 +1,7 @@
 var fs = require('fs');
-var outputFilePath = "output.json";
 
+//main
+var outputFilePath = "output.json";
 var data = {
 	hoge: 100,
 	foo: 'a',
@@ -10,6 +11,7 @@ var data = {
 console.log(JSON.stringify(data, null, '  '));
 write(outputFilePath, JSON.stringify(data, null, '  '))
 
+//functions
 function write(filePath, stream) {
   var result = false;
   try {
