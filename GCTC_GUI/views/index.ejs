@@ -13,37 +13,25 @@
   <p>Welcome to
     <%= title %>
   </p>
-
+  
   <form id='formReadJson'>
-    <p>
-      <h3>
-        <label for='textReadJson'>input filename to be read on server</label>
-      </h3>
-      <input id='textReadJson' type='text' name='textReadJson' />
-    </p>
-    <p>
-      <input type='submit' value='send (read remote file)' />
-    </p>
+    <h3>
+      <label for='textReadJson'>input filename to be read on server</label>
+    </h3>
+    <input id='textReadJson' type='text' name='textReadJson' />
+    <input type='submit' value='send (read remote file)' />
   </form>
-
-  <div id="test-callback"></div>
-  <table id="test-table"></table>
 
   <form id='formWriteJson'>
-    <p>
-      <h3>
-        <label for='textWriteJson'>write on server</label>
-      </h3>
-      <!-- <input id='textWriteJson' type='text' name='textWriteJson' /> -->
-    </p>
-    <p>
-      <input type='submit' value='send (write remote file)' />
-    </p>
+    <h3>
+      <label for='textWriteJson'>write on server</label>
+    </h3>
+    <div id="jsonList"></div>
+    <!-- <input id='textWriteJson' type='text' name='textWriteJson' /> -->
+    <input type='submit' value='send (write remote file)' />
   </form>
-
-
+  
   <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-  <script type="text/javascript" src="javascripts/jsonToHtmlTable.min.js"></script>
   <script type="text/javascript" src="javascripts/fileHandleRequest.js"></script>
 </body>
 
