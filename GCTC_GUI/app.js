@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 
-app.post('/handler', function(req, res) {
+app.post('/readjson', function(req, res) {
   var filename = req.body.filename;
   console.log('received: ' + filename + ' from client');
   if (filename) {
@@ -40,6 +40,25 @@ app.post('/handler', function(req, res) {
   	}else{
   	  res.send(false);
   	  console.log("error or no data in :" + filepath);
+  	}
+  } else {
+    res.send(false);
+  } 
+});
+
+app.post('/writejson', function(req, res) {
+  var content = req.body.content;
+  console.log('received: ' + content + ' from client');
+  if (content) {
+  	var filepath = path.join(__dirname, '/public', '/jsons', '/output.json');
+  	console.log('filepath: ' + filepath);
+  	var result = fileWrite(filepath, content);
+  	if(result){ //succeed in read file and has contents
+      res.send(true);
+      console.log('succeed in write file: ' + filepath);
+  	}else{
+  	  res.send(false);
+  	  console.log("error in write file: " + filepath);
   	}
   } else {
     res.send(false);

@@ -13,17 +13,31 @@
   <p>Welcome to
     <%= title %>
   </p>
-  <form id='formFP'>
+
+  <form id='formReadJson'>
     <p>
       <h3>
-        <label for='textFP'>input filename to be read on server</label>
+        <label for='textReadJson'>input filename to be read on server</label>
       </h3>
-      <input id='textFP' type='text' name='textFP' />
+      <input id='textReadJson' type='text' name='textReadJson' />
     </p>
     <p>
-      <input type='submit' value='send' />
+      <input type='submit' value='send (read remote file)' />
     </p>
   </form>
+
+  <form id='formWriteJson'>
+    <p>
+      <h3>
+        <label for='textWriteJson'>write on server</label>
+      </h3>
+      <!-- <input id='textWriteJson' type='text' name='textWriteJson' /> -->
+    </p>
+    <p>
+      <input type='submit' value='send (write remote file)' />
+    </p>
+  </form>
+
   <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
   <script type="text/javascript" src="javascripts/fileHandleRequest.js"></script>
 </body>
