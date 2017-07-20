@@ -14,7 +14,9 @@ var fs = require('fs');
 // }
 
 //main
+// var inputStr = read("input.json");
 var inputStr = read("input.json");
+console.log(inputStr);
 var obj = JSON.parse(inputStr); 
 
 var items = obj.items;

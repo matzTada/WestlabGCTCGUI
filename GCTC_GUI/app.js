@@ -10,6 +10,7 @@ var index = require('./routes/index');
 
 var app = express();
 
+
 // view engine setup
 app.set('port', 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -26,12 +27,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 
 app.post('/handler', function(req, res) {
-  var name = req.body.name;
-  if (name) {
-    // res.send(true);
-    res.send("received: " + name)
-    var message = new Buffer(name + "\n");
-    console.log(message);
+  var filename = req.body.filename;
+  console.log('received: ' + filename + ' from client');
+  if (filename) {
+  	var filepath = path.join(__dirname, '/public', '/jsons', filename);
+  	console.log('filepath: ' + filepath);
+  	var filestr = fileRead(filepath);
+  	console.log(filestr.toString());
+  	if(filestr){ //succeed in read file and has contents
+      res.send(filestr);
+      console.log(filepath + '\n' + filestr);
+  	}else{
+  	  res.send(false);
+  	  console.log("error or no data in :" + filepath);
+  	}
   } else {
     res.send(false);
   } 
@@ -62,9 +71,11 @@ module.exports = app;
 function fileCheck(filePath) {
   var isExist = false;
   try {
-    fs.statSync(filePath);
+    fs.statSync(filePath, { encoding: 'utf8' });
+    console.log(true);
     return true;
   } catch(err) {
+    console.log(false);
     return false;
   }
   return isExist;
@@ -72,8 +83,9 @@ function fileCheck(filePath) {
 
 function fileRead(filePath) {
   var content = new String();
-  if(check(filePath)) {;
-    content = fs.readFileSync(filePath, 'utf8');
+  if(fileCheck(filePath)) {;
+    content = fs.readFileSync(filePath, { encoding: 'utf8' });
+    console.log('finish read file');
   }
   return content;
 };
@@ -87,4 +99,3 @@ function fileWrite(filePath, stream) {
     return false;
   }
 }
-

@@ -1,14 +1,28 @@
 //using jQuery
 
-$('#formLM').submit(function() { // call postLM when a formLM's send button is pushed
-  postLM();
+$('#formFP').submit(function() { // call postFP when a formFP's send button is pushed
+  postFP();
   return false;
 });
 
-function postLM() { // POST /ledmatrix to send message to ledmatrix via UDP
-  var name = $('#textLM').val(); // get value from text form
+function postFP() { // POST /handler to send filename to be read on the server
+  var filename = $('#textFP').val(); // get value from text form
   $('#textLM').val(''); // clear form
-  $.post('/handler', { name: name }, function(res) { //access post /ledmatrix with value
-    console.log(res);
+  console.log('require:' + filename + 'via POST');
+  $.post('/handler', { filename: filename }, function(res) { //access post /handler with value
+    console.log('received responce: ' + res + ' from server');
+
+    if (res) {
+      var obj = JSON.parse(res);
+      var items = obj.items;
+      for (var i in items) {
+        var item = items[i];
+        var name = item.name;
+        var remarks = item.id;
+        console.log(name, remarks);
+      }
+    } else {
+      console.log('received invalid data');
+    }
   });
 }
