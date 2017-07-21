@@ -10,6 +10,8 @@ var index = require('./routes/index');
 
 var app = express();
 
+var jsonFileDir = path.join(__dirname, '/public', '/jsons');
+
 // view engine setup
 app.set('port', 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -25,49 +27,70 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 
+app.post('/filelist', function(req, res) {
+  console.log('received jsonFileList request from client');
+
+  var filelist = fs.readdirSync(jsonFileDir);
+  console.log('filelist: ' + filelist);
+
+  if (filelist) {
+    var filelistObj = {};
+    for(var i = 0; i < filelist.length; i++){
+      filelistObj[i] = filelist[i];
+    }
+    res.send(JSON.stringify(filelistObj));
+    console.log("send data");
+  } else {
+    res.send(false);
+  }
+});
+
 app.post('/readjson', function(req, res) {
   var filename = req.body.filename;
   console.log('received: ' + filename + ' from client');
-  if (filename) {
-  	var filepath = path.join(__dirname, '/public', '/jsons', filename);
-  	console.log('filepath: ' + filepath);
-  	var filestr = fileRead(filepath);
+  var filelist = fs.readdirSync(jsonFileDir);
+  if (filename && filelist.includes(filename)) {
+    var filepath = path.join(jsonFileDir, filename);
+    console.log('filepath: ' + filepath);
+    var filestr = fileRead(filepath);
     console.log(filestr);
     var returnObj = {
-      "filepath" : filepath,
-      "filestr" : JSON.parse(filestr)
+      "filepath": filepath,
+      "filestr": JSON.parse(filestr)
     }
     var returnStr = JSON.stringify(returnObj);
-  	console.log(returnStr);
-  	if(returnStr){ //succeed in read file and has contents
+    console.log(returnStr);
+    if (returnStr) { //succeed in read file and has contents
       res.send(returnStr);
       console.log("send data");
-  	}else{
-  	  res.send(false);
-  	  console.log("error or no data");
-  	}
+    } else {
+      res.send(false);
+      console.log("error or no data");
+    }
   } else {
     res.send(false);
-  } 
+  }
 });
 
 app.post('/writejson', function(req, res) {
+  var filename = req.body.filename;
   var content = req.body.content;
-  console.log('received: ' + content + ' from client');
-  if (content) {
-  	var filepath = path.join(__dirname, '/public', '/jsons', '/output.json');
-  	console.log('filepath: ' + filepath);
-  	var result = fileWrite(filepath, content);
-  	if(result){ //succeed in read file and has contents
+  var filelist = fs.readdirSync(jsonFileDir);
+  console.log('received: ' + filename + ':' + content + ' from client');
+  if (filename && content && filelist.includes(filename)) {
+    var filepath = path.join(jsonFileDir, filename);
+    console.log('filepath: ' + filepath);
+    var result = fileWrite(filepath, content);
+    if (result) { //succeed in read file and has contents
       res.send(true);
       console.log('succeed in write file: ' + filepath);
-  	}else{
-  	  res.send(false);
-  	  console.log("error in write file: " + filepath);
-  	}
+    } else {
+      res.send(false);
+      console.log("error in write file: " + filepath);
+    }
   } else {
     res.send(false);
-  } 
+  }
 });
 
 
@@ -98,7 +121,7 @@ function fileCheck(filePath) {
     fs.statSync(filePath, { encoding: 'utf8' });
     console.log(true);
     return true;
-  } catch(err) {
+  } catch (err) {
     console.log(false);
     return false;
   }
@@ -107,7 +130,7 @@ function fileCheck(filePath) {
 
 function fileRead(filePath) {
   var content = new String();
-  if(fileCheck(filePath)) {;
+  if (fileCheck(filePath)) {;
     content = fs.readFileSync(filePath, { encoding: 'utf8' });
     console.log('finish read file');
   }
@@ -119,7 +142,7 @@ function fileWrite(filePath, stream) {
   try {
     fs.writeFileSync(filePath, stream);
     return true;
-  } catch(err) {
+  } catch (err) {
     return false;
   }
 }
