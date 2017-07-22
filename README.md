@@ -3,6 +3,14 @@
 * Node.js, Express, Docker  
 * File operation
 * [La-Poプロジェクト](https://github.com/matzTada/La-Po)を適宜参照すること（特にExpress, JSまわり）
+
+## To Do
+
+* ファイルリスト表示→リストにボタンを付与→ボタンを押したらファイル読み込みを行う
+* updatetimeの更新	
+* 時刻も追加する？
+
+## 戯言
 * 今後のことを考えると，websocketを使った方がいいかもしれない([Expressでの実装例](https://team-lab.github.io/skillup-nodejs/3/1.html))
 	* 例えば，サーバ側でパラメータが書き換えられたときとか，処理が終わったときとか．
 * ファイル名を```POST```とかで指定して送らせるのは鬼のように危ないな．```..```とか使えば実質どこでも行けちゃうわけだし．```read```も危ないが，writeは相当やばい
