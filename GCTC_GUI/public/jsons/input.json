@@ -1,1 +1,10 @@
-{"appname":"matzapp","updatetime":1,"params":{"param1":"hoge","param2":"hoge","param3":"hoge"}}
+{
+  "appname": "matzapp",
+  "updatetime": "20170722100123",
+  "updatecount": 2,
+  "params": {
+    "param1": "hoge",
+    "param2": "hoge",
+    "param3": "hoge"
+  }
+}

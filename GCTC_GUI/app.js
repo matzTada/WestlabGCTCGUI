@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs'); //added by TadaMatz file handling
+var dateUtils = require('date-utils');
 
 var index = require('./routes/index');
 
@@ -79,8 +80,13 @@ app.post('/writejson', function(req, res) {
   console.log('received: ' + filename + ':' + content + ' from client');
   if (filename && content && filelist.includes(filename)) {
     var filepath = path.join(jsonFileDir, filename);
-    console.log('filepath: ' + filepath);
-    var result = fileWrite(filepath, JSON.stringify(JSON.parse(content), undefined, 2));
+    console.log('filepath: ' + filepath); 
+    var jsonObj = JSON.parse(content);
+    jsonObj.updatecount += 1;
+    var dt = new Date();
+    var formatted = dt.toFormat("YYYYMMDDHH24MISS");
+    jsonObj.updatetime = formatted;
+    var result = fileWrite(filepath, JSON.stringify(jsonObj, undefined, 2));
     if (result) { //succeed in read file and has contents
       res.send(true);
       console.log('succeed in write file: ' + filepath);
