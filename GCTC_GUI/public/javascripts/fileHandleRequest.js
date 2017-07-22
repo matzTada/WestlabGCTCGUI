@@ -2,8 +2,8 @@
 
 var recentJsonObj = undefined;
 
-$(function(){ //soon after finishing to read html file
-  postFileList();  
+$(function() { //soon after finishing to read html file
+  postFileList();
   return false;
 });
 
@@ -18,7 +18,7 @@ $(document).on('click', '.filelistbutton', function() {
   postReadJson();
 });
 
-function postFileList() { 
+function postFileList() {
   $.post('/filelist', {}, function(res) { //access post /readjson with value
     console.log('received responce: ' + res + ' from server');
 
@@ -27,15 +27,30 @@ function postFileList() {
 
       var resObj = JSON.parse(res);
 
-      var str = "<ul>";
+      // var str = "<ul>";
+      // for (var key in resObj) {
+      //   str += "<li>";
+      //   var value = resObj[key];
+      //   var id = 'button' + value;
+      //   str += "<input id='" + id + "' class='filelistbutton' type='button' value='" + value + "'/>";
+      //   str += "</li>";
+      // }
+      // str += "</ul>";
+
+      var str = "<table>";
       for (var key in resObj) {
-        str += "<li>";
+        str += "<tr>";
+        str += "<td>";
+
         var value = resObj[key];
         var id = 'button' + value;
         str += "<input id='" + id + "' class='filelistbutton' type='button' value='" + value + "'/>";
-        str += "</li>";
+
+        str += "</td>";
+        str += "</tr>";
+
       }
-      str += "</ul>";
+      str += "</table>";
       $('#fileList').html(str);
 
     } else {
@@ -62,7 +77,8 @@ function postReadJson() { // POST /readjson to send filename to be read on the s
       var obj = JSON.parse(res);
       var jsonNameStr = obj.filepath;
       $('#jsonName').html(jsonNameStr);
-      var jsonListStr = recursiveJsonList(obj.filestr, '');
+      // var jsonListStr = recursiveJsonList(obj.filestr, '');
+      var jsonListStr = recursiveJsonTable(obj.filestr, '');
       $('#jsonList').html(jsonListStr);
       recentJsonObj = obj.filestr; // pass json object for output
 
@@ -84,14 +100,16 @@ function postWriteJson(jsonobj) { // POST /WriteJson to send filename to be read
   var filename = $('#textReadJson').val(); // get value from text form
   if (recentJsonObj != undefined && recentJsonObj.params.length != 0) {
     for (var key in recentJsonObj.params) {
-      recentJsonObj.params[key] = $('#form' + key).val();
-      $('#form' + key).val('');
+      if (typeof(recentJsonObj.params[key]) != "object") {
+        recentJsonObj.params[key] = $('#form' + key).val();
+        $('#form' + key).val('');
+      }
     }
     // var filename = $('#textWriteJson').val(); // get value from text form
     var content = JSON.stringify(recentJsonObj); // var content = '{"testStr" : "testStr"}';
     $.post('/writejson', { filename: filename, content: content }, function(res) { //access post /WriteJson with value
       console.log('received responce: ' + res + ' from server');
-      if(res){
+      if (res) {
         postReadJson();
       }
     });
@@ -111,15 +129,43 @@ function recursiveJsonList(jsonObj, prevKey) { //cannot handle array yet... need
     if (typeof(value) == "object") {
       str += recursiveJsonList(value, key);
     } else {
-      if(prevKey == 'params'){ //hmmm... need to be fixed
+      if (prevKey == 'params') { //hmmm... need to be fixed
         str += "<input id='form" + key + "' type='text' value='" + value + "'/>"
-      }else{
+      } else {
         str += value;
       }
     }
     str += "</li>";
   }
   str += "</ul>";
+
+  return str;
+}
+
+function recursiveJsonTable(jsonObj, prevKey) { //cannot handle array yet... need to be fixed
+  var str = "<table>";
+  for (var key in jsonObj) {
+    str += "<tr>";
+    str += "<td>";
+    str += key;
+    str += "</td>";
+    str += "<td>";
+    var value = jsonObj[key];
+    // console.log(key, value);
+
+    if (typeof(value) == "object") {
+      str += recursiveJsonTable(value, key);
+    } else {
+      if (prevKey == 'params') { //hmmm... need to be fixed
+        str += "<input id='form" + key + "' type='text' value='" + value + "'/>"
+      } else {
+        str += value;
+      }
+    }
+    str += "</td>";
+    str += "</tr>"
+  }
+  str += "</table>";
 
   return str;
 }
