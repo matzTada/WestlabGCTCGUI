@@ -80,7 +80,7 @@ app.post('/writejson', function(req, res) {
   if (filename && content && filelist.includes(filename)) {
     var filepath = path.join(jsonFileDir, filename);
     console.log('filepath: ' + filepath);
-    var result = fileWrite(filepath, content);
+    var result = fileWrite(filepath, JSON.stringify(JSON.parse(content), undefined, 2));
     if (result) { //succeed in read file and has contents
       res.send(true);
       console.log('succeed in write file: ' + filepath);

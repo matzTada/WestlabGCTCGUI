@@ -19,16 +19,16 @@
     <h3>
       <label for='textFileList'>file list</label>
     </h3>
-    <p id="fileList"></p>
-    <input type='submit' value='send (filelist)' />
+    <input type='submit' value='refresh (filelist)' />
   </form>
+  <p id="fileList"></p>
 
   <form id='formReadJson'>
     <h3>
       <label for='textReadJson'>input filename to be read on server</label>
     </h3>
     <input id='textReadJson' type='text' name='textReadJson' />
-    <input type='submit' value='send (read remote file)' />
+    <input type='submit' value='read remote file' />
   </form>
 
   <form id='formWriteJson'>
@@ -39,7 +39,7 @@
       <label for='textWriteJson'>write on server</label>
     </h3>
     output file name is defined for security reason
-    <input type='submit' value='send (write remote file)' />
+    <input type='submit' value='write remote file' />
   </form>
   
   <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>

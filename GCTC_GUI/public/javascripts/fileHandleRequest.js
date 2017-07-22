@@ -3,13 +3,18 @@
 var recentJsonObj = undefined;
 
 $(function(){ //soon after finishing to read html file
-  postFileList();
+  postFileList();  
   return false;
 });
 
 $('#formFileList').submit(function() {
   postFileList();
   return false;
+});
+
+$(document).on('click', '.filelistbutton', function() {
+  $('#textReadJson').val(this.value); // get value from text form
+  postReadJson();
 });
 
 function postFileList() { 
@@ -21,10 +26,18 @@ function postFileList() {
 
       var resObj = JSON.parse(res);
 
-      var listStr = recursiveJsonList(resObj);
+      var str = "<ul>";
+      for (var key in resObj) {
+        str += "<li>";
+        var value = resObj[key];
+        var id = 'button' + value;
+        str += "<input id='" + id + "' class='filelistbutton' type='button' value='" + value + "'/>";
+        str += "</li>";
+      }
+      str += "</ul>";
 
       // var obj = JSON.parse(res);
-      $('#fileList').html(listStr);
+      $('#fileList').html(str);
  
     } else {
       console.log('received invalid data');
