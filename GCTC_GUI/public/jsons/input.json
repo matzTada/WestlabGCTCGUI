@@ -1,9 +1,9 @@
 {
   "appname": "matzapp",
-  "updatetime": "2017-07-22T13:42:44",
-  "updatecount": 3,
+  "updatetime": "2017-07-22T14:44:44",
+  "updatecount": 4,
   "params": {
-    "param1": "cyome",
+    "param1": "hoge",
     "param2": "cyome",
     "param3": "mi"
   }
