@@ -84,7 +84,7 @@ app.post('/writejson', function(req, res) {
     var jsonObj = JSON.parse(content);
     jsonObj.updatecount += 1;
     var dt = new Date();
-    var formatted = dt.toFormat("YYYYMMDDHH24MISS");
+    var formatted = dt.toFormat("YYYY-MM-DDTHH24:MI:SS");
     jsonObj.updatetime = formatted;
     var result = fileWrite(filepath, JSON.stringify(jsonObj, undefined, 2));
     if (result) { //succeed in read file and has contents

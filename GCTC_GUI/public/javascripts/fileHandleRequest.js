@@ -13,6 +13,7 @@ $('#formFileList').submit(function() {
 });
 
 $(document).on('click', '.filelistbutton', function() {
+  console.log(this);
   $('#textReadJson').val(this.value); // get value from text form
   postReadJson();
 });
@@ -35,10 +36,8 @@ function postFileList() {
         str += "</li>";
       }
       str += "</ul>";
-
-      // var obj = JSON.parse(res);
       $('#fileList').html(str);
- 
+
     } else {
       console.log('received invalid data');
       recentJsonObj = undefined

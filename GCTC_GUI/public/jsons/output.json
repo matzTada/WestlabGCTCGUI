@@ -1,11 +1,11 @@
 {
   "appname": "appuppu",
-  "updatetime": 3,
-  "updatecount" : 1,
+  "updatetime": "2017-07-22T13:06:26",
+  "updatecount": 10,
   "params": {
-    "what": "yome",
-    "is": "nai",
-    "your": "tomobe",
+    "what": "hoge",
+    "is": "hoge",
+    "your": "hoge",
     "jinsei": "hoge"
   }
 }
