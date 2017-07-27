@@ -3,5 +3,5 @@ if [ -z "${JSON_FILE_DIR+x}" ] ; then #if JSON_FILE_DIR is not defined, define.
   export JSON_FILE_DIR="./public/jsons"
 fi
 echo "JSON_FILE_DIR: $JSON_FILE_DIR"
-export PORT=3330
+export PORT=3333
 npm start
