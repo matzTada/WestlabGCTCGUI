@@ -1,0 +1,11 @@
+{
+  "appname": "anonymizer",
+  "updatetime": "2017-07-27T08:21:37",
+  "updatecount": 5,
+  "params": {
+    "kAnonymizer": "1",
+    "kFlatter": "0",
+    "perturbator": "1",
+    "flatter": "0"
+  }
+}
