@@ -25,6 +25,7 @@
 * 同じディレクトリ内なら「いくらでも」「動的に」JSONファイル追加できる
 
 ### with Docker
+* 本番はこっちを使う
 * application起動(docker imageのbuildとdocker containerのrun) 
 ```
 cd WestlabGCTCGUI/docker
@@ -36,6 +37,7 @@ bash launchContainer.sh
 	* ```JSON_DIR``` : 各アプリケーションの設定が書かれたJSONファイルが入っているディレクトリの変更
 
 ### without Docker
+* frontendのテストをするならこちらが便利．
 * application起動(express applicationの起動)
 ```
 cd GCTC_GUI/
