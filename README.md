@@ -6,10 +6,11 @@
 
 ## To Do
 
-* Dockerの設定
+* フロントエンドのcontactとかmenuとか細かいところの編集
+* 使い方とシステム図をまとめる
+* OK~~Dockerの設定~~
 	* OK~~大枠ができた~~
 	* OK~~portとフォルダを外部から指定できるようにする~~
-* contactとかmenuとか細かいところの編集
 * OK~~このアプリ自体のconfigファイルを作る~~shell scriptにしました
 * OK~~ファイルリスト表示→リストにボタンを付与→ボタンを押したらファイル読み込みを行う~~
 * OK~~updatetimeの更新~~
@@ -23,6 +24,11 @@
 cd WestlabGCTCGUI/docker
 bash launchContainer.sh
 ```
+
+## System diagram when using Docker
+
+<img src="https://raw.githubusercontent.com/matzTada/WestlabGCTCGUI/master/WestlabGCTCGUI/resources/system.png" alt="" width=50%>
+
 
 ## 戯言
 * 今後のことを考えると，websocketを使った方がいいかもしれない([Expressでの実装例](https://team-lab.github.io/skillup-nodejs/3/1.html))
