@@ -27,7 +27,7 @@ bash launchContainer.sh
 
 ## System diagram when using Docker
 
-<img src="https://raw.githubusercontent.com/matzTada/WestlabGCTCGUI/master/WestlabGCTCGUI/resources/system.png" alt="" width=50%>
+<img src="https://raw.githubusercontent.com/matzTada/WestlabGCTCGUI/master/resources/system.png" alt="" width=50%>
 
 
 ## 戯言
