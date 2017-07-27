@@ -6,10 +6,23 @@
 
 ## To Do
 
+* Dockerの設定
+	* OK~~大枠ができた~~
+	* OK~~portとフォルダを外部から指定できるようにする~~
+* contactとかmenuとか細かいところの編集
 * OK~~このアプリ自体のconfigファイルを作る~~shell scriptにしました
 * OK~~ファイルリスト表示→リストにボタンを付与→ボタンを押したらファイル読み込みを行う~~
 * OK~~updatetimeの更新~~
 * OK~~時刻も追加する？~~
+
+## Docker
+
+* gui用のport(```GUI_PORT```)変更と設定が書かれたJSONファイルが入っているディレクトリ(```JSON_DIR```)の変更は```WestlabGCTCGUI/docker/launchContainer.sh```を書き換えてください
+* imageのビルドとコンテナの起動  
+```
+cd WestlabGCTCGUI/docker
+bash launchContainer.sh
+```
 
 ## 戯言
 * 今後のことを考えると，websocketを使った方がいいかもしれない([Expressでの実装例](https://team-lab.github.io/skillup-nodejs/3/1.html))
@@ -18,21 +31,3 @@
 	* 読み込み，書き込み含め，パスを固定
 	* ```apikey```みたいなのを作る？
 * ~~DOM操作をもう少し，ちゃんとやろう~~結局同じ行数になりそうな感じだからちょっと保留
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_MOVIE_ID_HERE
-" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_MOVIE_ID_HERE/0.jpg" 
-alt="movie on youtube" width=40% border="10" /></a>  
-[movie on youtube](https://www.youtube.com/watch?v=YOUTUBE_MOVIE_ID_HERE)  
-you must change 3 places "YOUTUBE_MOVIE_ID_HERE" to your same movie id.
-
-Overview of this project.
-
-## Proparation
-Explanation.  
-
-* <https://matztada.github.io>  
-* [link](https://matztada.github.io)
-
-## Images
-
-<a><img src="https://matztada.github.io/images/logo.jpg" alt="" width=50%></a>  
