@@ -8,7 +8,7 @@
 
 * Dockerの設定
 	* OK~~大枠ができた~~
-	* portとフォルダを外部から指定できるようにする
+	* OK~~portとフォルダを外部から指定できるようにする~~
 * contactとかmenuとか細かいところの編集
 * OK~~このアプリ自体のconfigファイルを作る~~shell scriptにしました
 * OK~~ファイルリスト表示→リストにボタンを付与→ボタンを押したらファイル読み込みを行う~~
@@ -21,7 +21,7 @@
 * imageのビルドとコンテナの起動  
 ```
 cd WestlabGCTCGUI/docker
-bash launchContainer,/.sh
+bash launchContainer.sh
 ```
 
 ## 戯言
