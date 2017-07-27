@@ -6,9 +6,10 @@
 
 ## To Do
 
+* OK~~このアプリ自体のconfigファイルを作る~~shell scriptにしました
 * OK~~ファイルリスト表示→リストにボタンを付与→ボタンを押したらファイル読み込みを行う~~
-* updatetimeの更新	
-* 時刻も追加する？
+* OK~~updatetimeの更新~~
+* OK~~時刻も追加する？~~
 
 ## 戯言
 * 今後のことを考えると，websocketを使った方がいいかもしれない([Expressでの実装例](https://team-lab.github.io/skillup-nodejs/3/1.html))

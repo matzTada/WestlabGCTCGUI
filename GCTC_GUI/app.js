@@ -5,16 +5,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs'); //added by TadaMatz file handling
-var dateUtils = require('date-utils');
+var dateUtils = require('date-utils'); //added by TadaMatz file handling
 
 var index = require('./routes/index');
 
 var app = express();
 
-var jsonFileDir = path.join(__dirname, '/public', '/jsons');
+//initialize
+var JSON_FILE_DIR = process.env.JSON_FILE_DIR;
+// var JSON_FILE_DIR = path.join(__dirname, '/public', '/jsons');
 
 // view engine setup
-app.set('port', 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -31,7 +32,7 @@ app.use('/', index);
 app.post('/filelist', function(req, res) {
   console.log('received jsonFileList request from client');
 
-  var filelist = fs.readdirSync(jsonFileDir);
+  var filelist = fs.readdirSync(JSON_FILE_DIR);
   console.log('filelist: ' + filelist);
 
   if (filelist) {
@@ -49,9 +50,9 @@ app.post('/filelist', function(req, res) {
 app.post('/readjson', function(req, res) {
   var filename = req.body.filename;
   console.log('received: ' + filename + ' from client');
-  var filelist = fs.readdirSync(jsonFileDir);
+  var filelist = fs.readdirSync(JSON_FILE_DIR);
   if (filename && filelist.includes(filename)) {
-    var filepath = path.join(jsonFileDir, filename);
+    var filepath = path.join(JSON_FILE_DIR, filename);
     console.log('filepath: ' + filepath);
     var filestr = fileRead(filepath);
     console.log(filestr);
@@ -76,10 +77,10 @@ app.post('/readjson', function(req, res) {
 app.post('/writejson', function(req, res) {
   var filename = req.body.filename;
   var content = req.body.content;
-  var filelist = fs.readdirSync(jsonFileDir);
+  var filelist = fs.readdirSync(JSON_FILE_DIR);
   console.log('received: ' + filename + ':' + content + ' from client');
   if (filename && content && filelist.includes(filename)) {
-    var filepath = path.join(jsonFileDir, filename);
+    var filepath = path.join(JSON_FILE_DIR, filename);
     console.log('filepath: ' + filepath); 
     var jsonObj = JSON.parse(content);
     jsonObj.updatecount += 1;
