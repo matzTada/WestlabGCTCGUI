@@ -35,6 +35,7 @@ bash launchContainer.sh
 	* ```WestlabGCTCGUI/docker/launchContainer.sh```を書き換えてください.
 	* ```GUI_PORT``` : gui用のport
 	* ```JSON_DIR``` : 各アプリケーションの設定が書かれたJSONファイルが入っているディレクトリの変更
+* Raspberry Piでも[Hypriotのrpi用nodeイメージ](https://hub.docker.com/r/hypriot/rpi-node/)を使えば動くことを確認しました．
 
 ### without Docker
 * frontendのテストをするならこちらが便利．
