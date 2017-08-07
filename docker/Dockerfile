@@ -1,7 +1,7 @@
 #normal
-#FROM node
+FROM node
 #for raspberry pi
-FROM hypriot/rpi-node
+#FROM hypriot/rpi-node
 MAINTAINER matzTada
 RUN ["git", "clone", "https://github.com/matzTada/WestlabGCTCGUI"]
 WORKDIR /WestlabGCTCGUI/GCTC_GUI
