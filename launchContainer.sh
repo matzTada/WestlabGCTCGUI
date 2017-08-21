@@ -6,6 +6,7 @@ GUI_PORT=3333
 #JSON_DIR="../config_jsons" #relative path allowed. change here for config json files
 #JSON_DIR="../GCTC_GUI/public/jsons" #relative path allowed. change here for config json files
 #JSON_DIR=$(cd $(dirname $0) && cd $JSON_DIR && pwd) #convert to absolute path
-JSON_DIR=$PWD/GCTC_GUI/public/jsons
+#JSON_DIR=$PWD/GCTC_GUI/public/jsons
+JSON_DIR=$PWD/config_jsons
 sudo docker run -it -v $JSON_DIR:/jsons -p $GUI_PORT:3333 --rm gctcgui /bin/bash ./start.sh
 

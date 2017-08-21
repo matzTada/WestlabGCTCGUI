@@ -98,6 +98,35 @@ app.post('/writejson', function(req, res) {
   } else {
     res.send(false);
   }
+
+  if (filename == "anonymizer.json"){
+    console.log("hard-coded process started");
+    filename = "recommendation.json";
+
+    if (filename && filelist.includes(filename)) {
+      var filepath = path.join(JSON_FILE_DIR, filename);
+      console.log('filepath: ' + filepath); 
+      var filestr = fileRead(filepath);
+      console.log(filestr);
+      var jsonObj = JSON.parse(filestr);
+      jsonObj.updatecount += 1;
+      var dt = new Date();
+      var formatted = dt.toFormat("YYYY-MM-DDTHH24:MI:SS");
+      jsonObj.updatetime = formatted;
+      var result = fileWrite(filepath, JSON.stringify(jsonObj, undefined, 2));
+      if (result) { //succeed in read file and has contents
+        console.log('succeed in write file: ' + filepath);
+      } else {
+        console.log("error in write file: " + filepath);
+      }
+    } else {
+      console.log("file was not found");
+    }
+
+
+  }else{
+    console.log("normal process finished");
+  }
 });
 
 
