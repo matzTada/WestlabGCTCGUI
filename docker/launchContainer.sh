@@ -2,7 +2,7 @@
 sudo docker build --no-cache=true -t gctcgui `pwd`
 
 #run docker container
-GUI_PORT=3333
+GUI_PORT=3001
 JSON_DIR="../config_jsons" #relative path allowed. change here for config json files
 #JSON_DIR="../GCTC_GUI/public/jsons" #relative path allowed. change here for config json files
 JSON_DIR=$(cd $(dirname $0) && cd $JSON_DIR && pwd) #convert to absolute path
